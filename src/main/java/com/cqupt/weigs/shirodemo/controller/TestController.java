@@ -1,5 +1,6 @@
 package com.cqupt.weigs.shirodemo.controller;
 
+import com.cqupt.weigs.shirodemo.common.Result;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -12,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class TestController {
 
     @RequestMapping
-    public String test() {
-        return "test";
+    public Result<String> test() {
+        return Result.success("sss");
     }
 }

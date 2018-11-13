@@ -10,7 +10,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 public class Result<T> {
     private int code;
     private String msg;
-    private T t;
+    private T data;
 
     private Result(){
 
@@ -25,25 +25,25 @@ public class Result<T> {
         this.msg = msg;
     }
 
-    private Result(int code, String msg, T t) {
+    private Result(int code, String msg, T data) {
         this.code = code;
         this.msg = msg;
-        this.t = t;
+        this.data = data;
     }
 
-    private Result(String msg, T t) {
+    private Result(String msg, T data) {
         this.msg = msg;
-        this.t = t;
+        this.data = data;
     }
 
-    private Result(int code, T t) {
+    private Result(int code, T data) {
         this.code = code;
-        this.t = t;
+        this.data = data;
     }
 
 
-    public static <T> Result<T> success(T t) {
-        return new Result<>(ResponseCode.SUCCESS.getCode(), t);
+    public static <T> Result<T> success(T data) {
+        return new Result<>(ResponseCode.SUCCESS.getCode(), data);
     }
 
     public static <T>Result<T> error(String msg) {
@@ -59,6 +59,6 @@ public class Result<T> {
     }
 
     public T getT() {
-        return t;
+        return data;
     }
 }
