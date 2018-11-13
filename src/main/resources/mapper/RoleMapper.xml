@@ -6,30 +6,32 @@
       <idArg column="id" jdbcType="BIGINT" javaType="java.lang.Long" />
       <arg column="role" jdbcType="VARCHAR" javaType="java.lang.String" />
       <arg column="description" jdbcType="VARCHAR" javaType="java.lang.String" />
+        <arg column="resource_ids" jdbcType="VARCHAR" javaType="java.lang.String"/>
       <arg column="available" jdbcType="BIT" javaType="java.lang.Boolean" />
     </constructor>
   </resultMap>
   <sql id="Base_Column_List" >
-    id, role, description, available
+      id, role, description, resource_ids, available
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
     <include refid="Base_Column_List" />
-    from sys_roles
+      from sys_role
     where id = #{id,jdbcType=BIGINT}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
-    delete from sys_roles
+      delete
+      from sys_role
     where id = #{id,jdbcType=BIGINT}
   </delete>
   <insert id="insert" parameterType="com.cqupt.weigs.shirodemo.entity.Role" >
-    insert into sys_roles (id, role, description, 
-      available)
-    values (#{id,jdbcType=BIGINT}, #{role,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, 
-      #{available,jdbcType=BIT})
+      insert into sys_role (id, role, description, resource_ids, available)
+      values (#{id,jdbcType=BIGINT}, #{role,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR},
+              #{resourceIds,jdbcType=VARCHAR},
+              #{available,jdbcType=BIT})
   </insert>
   <insert id="insertSelective" parameterType="com.cqupt.weigs.shirodemo.entity.Role" >
-    insert into sys_roles
+      insert into sys_role
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
         id,
@@ -40,6 +42,9 @@
       <if test="description != null" >
         description,
       </if>
+        <if test="resourceIds != null">
+            resource_ids,
+        </if>
       <if test="available != null" >
         available,
       </if>
@@ -54,13 +59,16 @@
       <if test="description != null" >
         #{description,jdbcType=VARCHAR},
       </if>
+        <if test="resourceIds != null">
+            #{resourceIds,jdbcType=VARCHAR},
+        </if>
       <if test="available != null" >
         #{available,jdbcType=BIT},
       </if>
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.cqupt.weigs.shirodemo.entity.Role" >
-    update sys_roles
+      update sys_role
     <set >
       <if test="role != null" >
         role = #{role,jdbcType=VARCHAR},
@@ -68,6 +76,9 @@
       <if test="description != null" >
         description = #{description,jdbcType=VARCHAR},
       </if>
+        <if test="resourceIds != null">
+            resource_ids = #{resourceIds,jdbcType=VARCHAR},
+        </if>
       <if test="available != null" >
         available = #{available,jdbcType=BIT},
       </if>
@@ -75,10 +86,11 @@
     where id = #{id,jdbcType=BIGINT}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.cqupt.weigs.shirodemo.entity.Role" >
-    update sys_roles
-    set role = #{role,jdbcType=VARCHAR},
-      description = #{description,jdbcType=VARCHAR},
-      available = #{available,jdbcType=BIT}
+      update sys_role
+      set role         = #{role,jdbcType=VARCHAR},
+          description  = #{description,jdbcType=VARCHAR},
+          resource_ids = #{resourceIds,jdbcType=VARCHAR},
+          available    = #{available,jdbcType=BIT}
     where id = #{id,jdbcType=BIGINT}
   </update>
 </mapper>

@@ -3,19 +3,25 @@ package com.cqupt.weigs.shirodemo.entity;
 public class User {
     private Long id;
 
+    private Long organizationId;
+
     private String username;
 
     private String password;
 
     private String salt;
 
+    private String roleIds;
+
     private Boolean locked;
 
-    public User(Long id, String username, String password, String salt, Boolean locked) {
+    public User(Long id, Long organizationId, String username, String password, String salt, String roleIds, Boolean locked) {
         this.id = id;
+        this.organizationId = organizationId;
         this.username = username;
         this.password = password;
         this.salt = salt;
+        this.roleIds = roleIds;
         this.locked = locked;
     }
 
@@ -29,6 +35,14 @@ public class User {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Long getOrganizationId() {
+        return organizationId;
+    }
+
+    public void setOrganizationId(Long organizationId) {
+        this.organizationId = organizationId;
     }
 
     public String getUsername() {
@@ -53,6 +67,14 @@ public class User {
 
     public void setSalt(String salt) {
         this.salt = salt == null ? null : salt.trim();
+    }
+
+    public String getRoleIds() {
+        return roleIds;
+    }
+
+    public void setRoleIds(String roleIds) {
+        this.roleIds = roleIds == null ? null : roleIds.trim();
     }
 
     public Boolean getLocked() {

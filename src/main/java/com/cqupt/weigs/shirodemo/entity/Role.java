@@ -7,12 +7,15 @@ public class Role {
 
     private String description;
 
+    private String resourceIds;
+
     private Boolean available;
 
-    public Role(Long id, String role, String description, Boolean available) {
+    public Role(Long id, String role, String description, String resourceIds, Boolean available) {
         this.id = id;
         this.role = role;
         this.description = description;
+        this.resourceIds = resourceIds;
         this.available = available;
     }
 
@@ -42,6 +45,14 @@ public class Role {
 
     public void setDescription(String description) {
         this.description = description == null ? null : description.trim();
+    }
+
+    public String getResourceIds() {
+        return resourceIds;
+    }
+
+    public void setResourceIds(String resourceIds) {
+        this.resourceIds = resourceIds == null ? null : resourceIds.trim();
     }
 
     public Boolean getAvailable() {
