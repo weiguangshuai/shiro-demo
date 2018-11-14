@@ -14,4 +14,13 @@ public interface UserService {
     Result<User> findByUsername(String username);
 
     Set<String> findRoles(String username);
+
+    /**
+     * 根据用户名查找权限
+     *
+     * @param username
+     * @return
+     */
+    Set<String> findPermissions(String username);
+
 }

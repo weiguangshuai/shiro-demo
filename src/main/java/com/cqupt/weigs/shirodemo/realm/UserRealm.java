@@ -38,7 +38,8 @@ public class UserRealm extends AuthorizingRealm {
         String username = (String) principalCollection.getPrimaryPrincipal();
         SimpleAuthorizationInfo simpleAuthorizationInfo = new SimpleAuthorizationInfo();
         simpleAuthorizationInfo.setRoles(userService.findRoles(username));
-        return null;
+        simpleAuthorizationInfo.setStringPermissions(userService.findPermissions(username));
+        return simpleAuthorizationInfo;
     }
 
     /**
@@ -66,6 +67,6 @@ public class UserRealm extends AuthorizingRealm {
         }
         //交给AuthenticatingRealm使用CredentialsMatcher进行密码匹配，可以自定义实现
         return new SimpleAuthenticationInfo(user.getUsername(),
-            user.getPassword(), ByteSource.Util.bytes(user.getSalt()), getName());
+                user.getPassword(), ByteSource.Util.bytes(user.getSalt()), getName());
     }
 }

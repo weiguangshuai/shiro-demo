@@ -4,6 +4,8 @@ spring:
   datasource:
     url: jdbc:mysql://127.0.0.1:3306/shrio
     driver-class-name: com.mysql.jdbc.Driver
+    username: root
+    password: weigs
 mybatis:
   type-aliases-package: com.cqupt.weigs.shirodemo.entity
   mapper-locations: classpath:mapper/*.xml
