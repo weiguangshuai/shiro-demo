@@ -1,5 +1,6 @@
 package com.cqupt.weigs.shirodemo.common;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
 /**
@@ -12,12 +13,12 @@ public class Result<T> {
     private String msg;
     private T data;
 
-    private Result(){
+    private Result() {
 
     }
 
     private Result(int code) {
-        this.code =code;
+        this.code = code;
     }
 
     private Result(int code, String msg) {
@@ -46,8 +47,13 @@ public class Result<T> {
         return new Result<>(ResponseCode.SUCCESS.getCode(), data);
     }
 
-    public static <T>Result<T> error(String msg) {
+    public static <T> Result<T> error(String msg) {
         return new Result<>(ResponseCode.ERROR.getCode(), msg);
+    }
+
+    @JsonIgnore
+    public boolean isSuccess() {
+        return code == ResponseCode.SUCCESS.getCode();
     }
 
     public int getCode() {

@@ -1,7 +1,9 @@
 package com.cqupt.weigs.shirodemo.dao;
 
 import com.cqupt.weigs.shirodemo.entity.Resource;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface ResourceMapper {
     int deleteByPrimaryKey(Long id);
 
