@@ -23,4 +23,5 @@ public interface UserService {
      */
     Set<String> findPermissions(String username);
 
+    Result<String> insertUser(User user);
 }
