@@ -1,5 +1,6 @@
 package com.cqupt.weigs.shirodemo;
 
+import com.cqupt.weigs.shirodemo.credentials.RetryLimitHashCredentialsMatcher;
 import com.cqupt.weigs.shirodemo.realm.UserRealm;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -20,6 +21,13 @@ public class ShiroConfig {
     @Bean
     public UserRealm userRealm() {
         UserRealm userRealm = new UserRealm();
+        userRealm.setCredentialsMatcher(retryLimitHashCredentialsMatcher());
         return userRealm;
     }
+
+    @Bean
+    public RetryLimitHashCredentialsMatcher retryLimitHashCredentialsMatcher() {
+        return new RetryLimitHashCredentialsMatcher();
+    }
+
 }
