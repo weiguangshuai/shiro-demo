@@ -71,6 +71,7 @@ public class UserServiceImpl implements UserService {
         String password = new SimpleHash("MD5", user.getPassword(),
             salt, 1).toHex();
         user.setPassword(password);
+        user.setSalt(user.getUsername());
         int result = userMapper.insertSelective(user);
         if (result != 0) {
             return Result.success("success");

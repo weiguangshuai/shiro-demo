@@ -27,7 +27,12 @@ public class RetryLimitHashCredentialsMatcher extends HashedCredentialsMatcher {
     public boolean doCredentialsMatch(AuthenticationToken token, AuthenticationInfo info) {
         String username = (String) token.getPrincipal();
         //如果相应的username获取到的integer为null，则设置为0
-        passwordRetryCache.putIfAbsent(username, 0);
+        if (passwordRetryCache.get(username) == null) {
+            passwordRetryCache.put(username, 0);
+        } else {
+            int count = passwordRetryCache.get(username) + 1;
+            passwordRetryCache.put(username, count);
+        }
         if ((passwordRetryCache.get(username) + 1) > 5) {
             throw new ExcessiveAttemptsException("账号已经锁定，请更改密码后重新登录");
         }

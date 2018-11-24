@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @date 2018/11/11 0011
  */
 @RestController
-@RequestMapping("/admin")
+@RequestMapping("/user")
 public class UserController {
 
     @Autowired
@@ -30,15 +30,6 @@ public class UserController {
         return Result.success("登录成功");
     }
 
-    @RequestMapping(value = "/index", method = RequestMethod.GET)
-    public Result<String> index() {
-        return Result.success("index");
-    }
-
-    @RequestMapping(value = "/weigs", method = RequestMethod.GET)
-    public Result<String> weigs() {
-        return Result.success("weigs");
-    }
 
     @RequestMapping(value = "/register", method = RequestMethod.POST)
     public Result<String> register(User user) {

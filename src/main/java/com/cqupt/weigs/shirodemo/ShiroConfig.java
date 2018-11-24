@@ -27,19 +27,24 @@ import java.util.Map;
 @Configuration
 public class ShiroConfig {
 
-    private static final long GLOBAL_SESSION_TIMEOUT = 180 * 1000;
+    private static final long GLOBAL_SESSION_TIMEOUT = 60 * 1000;
 
     @Bean
     public UserRealm userRealm() {
         UserRealm userRealm = new UserRealm();
-//        userRealm.setCredentialsMatcher(retryLimitHashCredentialsMatcher());
-        userRealm.setCredentialsMatcher(hashedCredentialsMatcher());
+        userRealm.setCredentialsMatcher(retryLimitHashCredentialsMatcher());
+//        userRealm.setCredentialsMatcher(hashedCredentialsMatcher());
         return userRealm;
     }
 
     @Bean
     public RetryLimitHashCredentialsMatcher retryLimitHashCredentialsMatcher() {
-        return new RetryLimitHashCredentialsMatcher();
+        RetryLimitHashCredentialsMatcher retryLimitHashCredentialsMatcher =
+                new RetryLimitHashCredentialsMatcher();
+        //md5加密一次
+        retryLimitHashCredentialsMatcher.setHashAlgorithmName("md5");
+        retryLimitHashCredentialsMatcher.setHashIterations(1);
+        return retryLimitHashCredentialsMatcher;
     }
 
     @Bean
@@ -72,10 +77,11 @@ public class ShiroConfig {
     public ShiroFilterFactoryBean shiroFilter(SecurityManager securityManager) {
         ShiroFilterFactoryBean bean = new ShiroFilterFactoryBean();
         bean.setSecurityManager(securityManager);
-        bean.setLoginUrl("");
+        //跳转到登录的路由
+        bean.setLoginUrl("/admin/index");
 
         Map<String, String> filterChainDefinitionMap = new LinkedHashMap<>();
-        filterChainDefinitionMap.put("/admin/index", "anon");
+        filterChainDefinitionMap.put("/user/register", "anon");
         filterChainDefinitionMap.put("/admin/weigs", "authc");
         bean.setFilterChainDefinitionMap(filterChainDefinitionMap);
         return bean;
