@@ -5,4 +5,7 @@ package com.cqupt.weigs.shirodemo;
  * @date 2019/6/12 0012
  */
 public class test {
+    public static void main(String[] args) {
+        System.out.println("test01");
+    }
 }
